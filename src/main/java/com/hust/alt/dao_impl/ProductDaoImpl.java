@@ -27,6 +27,7 @@ public class ProductDaoImpl extends BaseDaoImpl<Product> implements ProductDao {
         product.setImage(resultSet.getString("image"));
         product.setIntroduction(resultSet.getString("introduction"));
         product.setCategoryId(resultSet.getInt("category_id"));
+        product.setDeleted(resultSet.getBoolean("deleted"));
         return product;
     }
 

@@ -6,23 +6,26 @@ public class Account {
     private String password;
     private String email;
     private String sdt;
+    private boolean deleted;
 
-    public Account(String username, String password, String email, String sdt) {
+    public Account(String username, String password, String email, String sdt, Boolean deleted) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.sdt = sdt;
+        this.deleted = deleted;
     }
 
     public Account() {
     }
 
-    public Account(int id, String username, String password, String email, String sdt) {
+    public Account(int id, String username, String password, String email, String sdt, Boolean deleted) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.email = email;
         this.sdt = sdt;
+        this.deleted = deleted;
     }
 
     public int getId() {
@@ -63,5 +66,13 @@ public class Account {
 
     public void setSdt(String sdt) {
         this.sdt = sdt;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 }

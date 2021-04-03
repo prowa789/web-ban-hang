@@ -2,6 +2,8 @@ package com.hust.alt.dao;
 
 import com.hust.alt.model.Account;
 
+import java.sql.SQLException;
+
 public interface AccountDao extends BaseDao<Account>{
-    public boolean checkLogin(String username, String password);
+    public Account checkLogin(String username, String password) throws SQLException;
 }
