@@ -3,6 +3,7 @@ package com.hust.alt.dao_impl;
 import com.hust.alt.dao.AccountDao;
 import com.hust.alt.model.Account;
 import com.hust.alt.model.MyConnection;
+import com.hust.alt.model.Product;
 
 import javax.xml.registry.infomodel.User;
 import java.sql.PreparedStatement;
@@ -16,17 +17,17 @@ public class AccountDaoImpl extends  BaseDaoImpl<Account> implements AccountDao{
     private MyConnection myConnection = new MyConnection();
 
     public Account checkLogin(String username, String password) throws SQLException {
-
-        List<Account> accounts = findAll();
-        for(Account account : accounts) {
-            if(account.getUsername().equalsIgnoreCase(username)) {
-                if (account.getPassword().equalsIgnoreCase(password)) {
-                    return account;
-                }
-                else return null;
-            }
+        Account account = null;
+        String sql = "select * from account where username = ? and password = ? and deleted = false";
+        PreparedStatement preparedStatement = myConnection.prepare(sql);
+        preparedStatement.setString(1, username);
+        preparedStatement.setString(2, password);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if(resultSet.next()) {
+            account = getObject(resultSet);
+            System.out.println(account);
         }
-        return null;
+        return account;
     }
 
     public Account getObject(ResultSet resultSet) throws SQLException {
@@ -38,12 +39,12 @@ public class AccountDaoImpl extends  BaseDaoImpl<Account> implements AccountDao{
         account.setEmail(resultSet.getString("email"));
         account.setSdt(resultSet.getString("sdt"));
         account.setDeleted(resultSet.getBoolean("deleted"));
-        return null;
+        return account;
     }
 
 
     public List<Account> findAll() throws SQLException {
-        String sql = "select * from account where deleted = false ";
+        String sql = "select * from account where deleted = false";
         PreparedStatement statement = myConnection.prepare(sql);
         return getList(statement.executeQuery());
     }
@@ -55,7 +56,7 @@ public class AccountDaoImpl extends  BaseDaoImpl<Account> implements AccountDao{
         statement.setInt(1, id);
         ResultSet resultSet = statement.executeQuery();
         if (resultSet.next()) account = getObject(resultSet);
-        return account  ;
+        return account ;
     }
 
     public Account insert(Account account) throws SQLException {

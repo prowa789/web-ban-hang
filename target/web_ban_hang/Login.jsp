@@ -20,8 +20,8 @@
             <form class="form-signin" action="login" method="post">
                 <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Sign in</h1>
                 <p class="text-danger">${mess}</p>
-                <input name="user"  type="text" id="inputEmail" class="form-control" placeholder="Username" required="" autofocus="">
-                <input name="pass"  type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
+                <input name="username"  type="text" id="inputEmail" class="form-control" placeholder="Username" required="" autofocus="">
+                <input name="password"  type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
 
                 <div class="form-group form-check">
                     <input name="remember" value="1" type="checkbox" class="form-check-input" id="exampleCheck1">

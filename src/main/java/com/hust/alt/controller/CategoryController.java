@@ -17,7 +17,7 @@ import java.net.Inet4Address;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet(name = "CategoryController", value = "/category/*")
+@WebServlet(name = "CategoryController", value = "/category")
 public class CategoryController extends HttpServlet {
 
     ProductDao productDao = new ProductDaoImpl();

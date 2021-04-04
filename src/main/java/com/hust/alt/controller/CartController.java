@@ -14,6 +14,6 @@ public class CartController extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.sendRedirect("Cart.jsp");
+        request.getRequestDispatcher("Cart.jsp").forward(request,response);
     }
 }

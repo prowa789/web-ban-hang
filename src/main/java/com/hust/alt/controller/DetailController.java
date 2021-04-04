@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet(name = "DetailController",value = "/detail/*")
+@WebServlet(name = "DetailController",value = "/detail")
 public class DetailController extends HttpServlet {
 
     ProductDao productDao = new ProductDaoImpl();

@@ -78,10 +78,10 @@ public class ProductDaoImpl extends BaseDaoImpl<Product> implements ProductDao {
 
     public boolean update(Product product) throws SQLException {
         boolean result = false;
-        String sql = "update product set name = ?,price = ?,image = ?,introduction = ?,deleted = ?,category_id = ?, where id = ?";
+        String sql = "update product set name = ?,price = ?,image = ?,introduction = ?,deleted = ?,category_id = ? where id = ?";
         PreparedStatement preparedStatement = myConnection.prepareUpdate(sql);
         preparedStatement.setString(1, product.getName());
-        preparedStatement.setDouble(2, (int) product.getPrice());
+        preparedStatement.setDouble(2, product.getPrice());
         preparedStatement.setString(3, product.getImage());
         preparedStatement.setString(4, product.getIntroduction());
         preparedStatement.setBoolean(5, product.isDeleted());
@@ -122,7 +122,7 @@ public class ProductDaoImpl extends BaseDaoImpl<Product> implements ProductDao {
         //p.* đẻ lấy chỉ lấy tất cả thông tin ở trong bảng product
         //p.category_id = c.id là điều kiện nối
         //distinct để tránh trường hợp trùng lặp lặp tìm kiếm chỉ xảy ra khi tìm kiếm thông tin trên nhiều bảng một lần
-        String sql = "select distinct p.* from product as p, category as c where c.deleted = false and c.id = ? and p.category_id = c.id";
+        String sql = "select distinct p.* from product as p, category as c where c.deleted = false and c.id = ? and p.deleted = false and p.category_id = c.id";
         PreparedStatement preparedStatement = myConnection.prepare(sql);
         preparedStatement.setInt(1, idCategory);
         ResultSet resultSet = preparedStatement.executeQuery();

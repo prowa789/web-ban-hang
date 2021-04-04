@@ -73,7 +73,7 @@ public class MyConnection {
     //hàm nhận vào một câu lệnh sql và trể một đối tượng PreparedSatement nhưng đối tượng này
     //dùng để thực hiện các câu lệnh thay đổi dữ liệu
     public PreparedStatement prepareUpdate(String sql) {
-//        System.out.println(">> "+sql);
+        System.out.println(">> "+sql);
         try {
             //cần truyền thêm tham số thứ 2 là Statement.RETURN_GENERATED_KEYS
             //Statement.RETURN_GENERATED_KEYS có tác dụng (giả sử khi thêm một bản ghi category thì

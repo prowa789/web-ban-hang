@@ -15,7 +15,11 @@ public class Account {
         this.sdt = sdt;
         this.deleted = deleted;
     }
-
+    public Account(String username, String password, Boolean deleted) {
+        this.username = username;
+        this.password = password;
+        this.deleted = deleted;
+    }
     public Account() {
     }
 
@@ -74,5 +78,17 @@ public class Account {
 
     public void setDeleted(boolean deleted) {
         this.deleted = deleted;
+    }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", sdt='" + sdt + '\'' +
+                ", deleted=" + deleted +
+                '}';
     }
 }

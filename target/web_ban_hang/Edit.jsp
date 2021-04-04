@@ -44,7 +44,7 @@
                     <div class="modal-content">
                         <form action="edit" method="post">
                             <div class="modal-header">						
-                                <h4 class="modal-title">Add Product</h4>
+                                <h4 class="modal-title">Edit Product</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             </div>
                             <div class="modal-body">					
@@ -65,18 +65,14 @@
                                     <input value="${detail.price}" name="price" type="text" class="form-control" required>
                                 </div>
                                 <div class="form-group">
-                                    <label>Title</label>
-                                    <textarea name="title" class="form-control" required>${detail.title}</textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label>Description</label>
-                                    <textarea name="description" class="form-control" required>${detail.description}</textarea>
+                                    <label>Introduction</label>
+                                    <textarea name="introduction" class="form-control" required>${detail.introduction}</textarea>
                                 </div>
                                 <div class="form-group">
                                     <label>Category</label>
                                     <select name="category" class="form-select" aria-label="Default select example">
-                                        <c:forEach items="${listCC}" var="o">
-                                            <option value="${o.cid}">${o.cname}</option>
+                                        <c:forEach items="${listCategory}" var="o">
+                                            <option ${detail.categoryId == o.id ? "selected":""} value="${o.id}">${o.name}</option>
                                         </c:forEach>
                                     </select>
                                 </div>
