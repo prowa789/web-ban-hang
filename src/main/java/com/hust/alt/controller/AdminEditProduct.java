@@ -28,6 +28,7 @@ public class AdminEditProduct extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         try {
+
             String id = request.getParameter("id");
             String name = request.getParameter("name");
             String image = request.getParameter("image");
@@ -37,16 +38,12 @@ public class AdminEditProduct extends HttpServlet {
 
 
             Product product = new Product(Integer.parseInt(id),name,Double.parseDouble(price),image,introduction,false,Integer.parseInt(category));
+
             boolean rs = productDao.update(product);
+
             if(rs) {
                 response.sendRedirect("manager-product");
             }
-            else {
-                System.out.println("lỗi");
-            }
-
-
-
 
         }catch (Exception e) {
             e.printStackTrace();
@@ -61,6 +58,7 @@ public class AdminEditProduct extends HttpServlet {
             request.setAttribute("detail",product);
             RequestDispatcher rd = request.getRequestDispatcher("/Edit.jsp");
             rd.forward(request,response);
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

@@ -31,7 +31,8 @@ public class AuthFilter implements Filter {
                     try {
                         Account account = accountDao.findById(Integer.parseInt(c.getValue()));
                         if(account == null) {
-                            response.sendRedirect(request.getContextPath() + "/login");
+                                response.sendRedirect(request.getContextPath() + "/login");
+
                         }else {
                             chain.doFilter(req, resp);
                         }
@@ -44,8 +45,10 @@ public class AuthFilter implements Filter {
                 }
             }
         }
-
-        response.sendRedirect(request.getContextPath() + "/login");
+        if (!response.isCommitted()){
+            // redirect or dispatch whereever you want
+            response.sendRedirect(request.getContextPath() + "/login");
+        }
     }
 
     public void init(FilterConfig config) throws ServletException {
