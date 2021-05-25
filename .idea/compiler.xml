@@ -7,6 +7,9 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="web_ban_hang" />
+        <module name="web-ban-hang" />
+        <module name="web-ban-hang-master" />
+        <module name="web-ban-hang1" />
       </profile>
     </annotationProcessing>
   </component>

@@ -9,6 +9,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Admin</title>
+        <link rel="shortcut icon" href="https://set.hust.edu.vn/storage/logo/set-logo.png"
+              type="image/x-icon">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -27,16 +29,16 @@
             <nav class="navbar navbar-inverse">
                 <div class="container-fluid">
                     <div class="navbar-header">
-                        <a class="navbar-brand" href="">WebSiteName</a>
+                        <a class="navbar-brand" href="/web_ban_hang_war">PhoneShop</a>
                     </div>
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="">Manager Product</a></li>
-                        <li><a href="dangki">Đăng kí</a></li>
+                        <li class="active"><a href="manager-product">Manager Product</a></li>
+<%--                        <li><a href="signup">Đăng kí</a></li>--%>
                         <li><a href="#"></a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Lê Tuấn Anh</a></li>
-                        <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-user"></span> ${acc.username}</a></li>
+                        <li><a href="/web_ban_hang_war/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                     </ul>
                 </div>
             </nav>
@@ -65,11 +67,12 @@
                             <th>Name</th>
                             <th>Image</th>
                             <th>Price</th>
+                            <th>Introduction</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach items="${listProduct}" var="o">
+                        <c:forEach items="${listA}" var="o">
                             <tr>
                                 <td>
                                     <span class="custom-checkbox">
@@ -83,6 +86,7 @@
                                     <img src="${o.image}">
                                 </td>
                                 <td>${o.price} $</td>
+                                <td>${o.introduction}</td>
                                 <td>
                                     <a href="edit?id=${o.id}"  class="edit" data-toggle="modal"><i class="material-icons" title="Edit">&#xE254;</i></a>
                                     <form method="delete" action="delete">
@@ -95,22 +99,34 @@
                     </tbody>
                 </table>
                 <div class="clearfix">
-                    <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
+                    <div class="hint-text">Showing <b>3</b> out of <b>${count}</b> entries</div>
                     <ul class="pagination">
-                        <li class="page-item disabled"><a href="#">Previous</a></li>
-                        <li class="page-item"><a href="#" class="page-link">1</a></li>
-                        <li class="page-item"><a href="#" class="page-link">2</a></li>
-                        <li class="page-item active"><a href="#" class="page-link">3</a></li>
-                        <li class="page-item"><a href="#" class="page-link">4</a></li>
-                        <li class="page-item"><a href="#" class="page-link">5</a></li>
-                        <li class="page-item"><a href="#" class="page-link">Next</a></li>
+                        <c:if test="${tag > 1}">
+                            <li class="page-item"><a href="manager-product?index=${tag-1}">Previous</a></li>
+                        </c:if>
+                        <c:forEach begin="1" end="${endP}" var="i">
+                            <li class="page-item ${tag == i?"active":""}"><a href="manager-product?index=${i}" class="page-link ">${i}</a></li>
+                        </c:forEach>
+                        <c:if test="${tag < endP}">
+                            <li class="page-item"><a href="manager-product?index=${tag+1}" class="page-link">Next</a></li>
+                        </c:if>
+<%--                        <li class="page-item disabled"><a href="#">Previous</a></li>--%>
+<%--                        <li class="page-item active"><a href="#" class="page-link">1</a></li>--%>
+<%--                        <li class="page-item"><a href="#" class="page-link">2</a></li>--%>
+<%--                        <li class="page-item"><a href="#" class="page-link">3</a></li>--%>
+<%--                        <li class="page-item"><a href="#" class="page-link">4</a></li>--%>
+<%--                        <li class="page-item"><a href="#" class="page-link">5</a></li>--%>
+<%--                        <li class="page-item"><a href="#" class="page-link">Next</a></li>--%>
                     </ul>
                 </div>
             </div>
-            <a href="#"><button type="button" class="btn btn-primary">Back to home</button>
+            <a href="/web_ban_hang_war"><button type="button" class="btn btn-primary">Back to home</button></a>
+        </div>
+        <script src="${pageContext.request.contextPath}/js/manager.js" type="text/javascript"></script>
+    </body>
 
         
         
-    <script src="${pageContext.request.contextPath}/js/manager.js" type="text/javascript"></script>
-</body>
+
+
 </html>

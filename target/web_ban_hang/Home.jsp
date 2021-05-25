@@ -1,3 +1,10 @@
+<%@ page import="com.hust.alt.model.Cart" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.text.NumberFormat" %>
+<%@ page import="com.hust.alt.dao_impl.ProductDaoImpl" %>
+<%@ page import="com.hust.alt.dao.ProductDao" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.hust.alt.model.Product" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -5,6 +12,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Home</title>
+        <link rel="shortcut icon" href="https://set.hust.edu.vn/storage/logo/set-logo.png"
+              type="image/x-icon">
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -19,7 +28,7 @@
                     <div class="col">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="Home.jsp">Home</a></li>
+                                <li class="breadcrumb-item"><a href="home">Home</a></li>
                                 <li class="breadcrumb-item"><a href="#">Category</a></li>
                                 <li class="breadcrumb-item active" aria-current="#">Sub-category</li>
                             </ol>
@@ -31,12 +40,13 @@
                 <div class="row">
                 <jsp:include page="Left.jsp"></jsp:include>
 
+
                     <div class="col-sm-9">
                         <div id="content" class="row">
                         <c:forEach items="${listProduct}" var="o">
                             <div class="product col-12 col-md-6 col-lg-4">
                                 <div class="card">
-                                    <img class="card-img-top" src="${o.image}" alt="${o.name}">
+                                    <a href="detail?id=${o.id}"><img class="card-img-top" src="${o.image}" alt="${o.name}"></a>
                                     <div class="card-body">
                                         <h4 class="card-title show_txt"><a href="detail?id=${o.id}" title="View Product">${o.name}</a></h4>
                                         <p class="card-text show_txt"></p>
@@ -44,8 +54,9 @@
                                             <div class="col">
                                                 <p class="btn btn-danger btn-block">${o.price} $</p>
                                             </div>
+
                                             <div class="col">
-                                                <a href="#" class="btn btn-success btn-block">Add to cart</a>
+                                                <a href="cart?command=addCart&id=${o.id}" class="btn btn-success btn-block">Add to cart</a>
                                             </div>
                                         </div>
                                     </div>
@@ -55,7 +66,6 @@
                     </div>
                     <button onclick="loadMore()" class="btn btn-primary">Load more</button>
                 </div>
-
             </div>
         </div>
 
@@ -65,10 +75,10 @@
                         function loadMore() {
                             var amount = document.getElementsByClassName("product").length;
                             $.ajax({
-                                url: "/Project_banhang/load",
+                                url: "/web_ban_hang_war/load",
                                 type: "get", //send it through get method
                                 data: {
-                                    exits: amount
+                                    exist: amount
                                 },
                                 success: function (data) {
                                     var row = document.getElementById("content");
@@ -82,7 +92,7 @@
                         function searchByName(param){
                             var txtSearch = param.value;
                             $.ajax({
-                                url: "/Project_banhang/searchAjax",
+                                url: "/web_ban_hang_war/searchAjax",
                                 type: "get", //send it through get method
                                 data: {
                                     txt: txtSearch

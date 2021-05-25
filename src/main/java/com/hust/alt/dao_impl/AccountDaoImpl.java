@@ -30,6 +30,19 @@ public class AccountDaoImpl extends  BaseDaoImpl<Account> implements AccountDao{
         return account;
     }
 
+    @Override
+    public Account checkAccountExist(String username) throws SQLException {
+        Account account = null;
+        String sql = "select * from account where username = ?";
+        PreparedStatement statement = myConnection.prepare(sql);
+        statement.setString(1, username);
+        ResultSet resultSet = statement.executeQuery();
+        if (resultSet.next()){
+            account = getObject(resultSet);
+        }
+        return account;
+    }
+
     public Account getObject(ResultSet resultSet) throws SQLException {
         Account account = null;
         account = new Account();
@@ -61,13 +74,12 @@ public class AccountDaoImpl extends  BaseDaoImpl<Account> implements AccountDao{
 
     public Account insert(Account account) throws SQLException {
         Account account1 = null;
-        String sql = "insert into account(username, password, email, sdt , deleted) values(?,?,?,?,?)";
+        String sql = "insert into account(username, password, email, sdt ) values(?,?,?,?)";
         PreparedStatement statement = myConnection.prepareUpdate(sql);
         statement.setString(1, account.getUsername());
         statement.setString(2, account.getPassword());
         statement.setString(3, account.getEmail());
         statement.setString(4, account.getSdt());
-        statement.setBoolean(5, account.isDeleted());
 
         int rs = statement.executeUpdate();
         if (rs > 0){
@@ -103,4 +115,6 @@ public class AccountDaoImpl extends  BaseDaoImpl<Account> implements AccountDao{
 
         return result;
     }
+
+
 }

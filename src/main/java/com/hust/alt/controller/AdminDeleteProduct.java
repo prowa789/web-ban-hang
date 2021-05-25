@@ -17,7 +17,6 @@ import java.sql.SQLException;
 public class AdminDeleteProduct extends HttpServlet {
 
     ProductDao productDao = new ProductDaoImpl();
-    CategoryDao categoryDao = new CategoryDaoImpl();
 
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

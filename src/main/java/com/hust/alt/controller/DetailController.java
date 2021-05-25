@@ -1,10 +1,16 @@
 package com.hust.alt.controller;
 
 import com.hust.alt.dao.CategoryDao;
+import com.hust.alt.dao.CommentDao;
+import com.hust.alt.dao.ImageProductDao;
 import com.hust.alt.dao.ProductDao;
 import com.hust.alt.dao_impl.CategoryDaoImpl;
+import com.hust.alt.dao_impl.CommentDaoImpl;
+import com.hust.alt.dao_impl.ImageProductImpl;
 import com.hust.alt.dao_impl.ProductDaoImpl;
 import com.hust.alt.model.Category;
+import com.hust.alt.model.Comment;
+import com.hust.alt.model.ImageProduct;
 import com.hust.alt.model.Product;
 
 import javax.servlet.ServletException;
@@ -23,8 +29,11 @@ public class DetailController extends HttpServlet {
 
     CategoryDao categoryDao = new CategoryDaoImpl();
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    CommentDao commentDao = new CommentDaoImpl();
 
+    ImageProductDao imageProductDao = new ImageProductImpl();
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -35,10 +44,16 @@ public class DetailController extends HttpServlet {
             Product product = productDao.findById(productId);
             Product lastProduct = productDao.getLastProduct();
             List<Category> listCategory = categoryDao.findAll();
+            List<Comment> comments = commentDao.findByProduct(productId);
+            List<ImageProduct> listImage = imageProductDao.findByProductId(productId);
+
             // đổ lên view
             request.setAttribute("product",product);
             request.setAttribute("lastProduct",lastProduct);
             request.setAttribute("listCategory",listCategory);
+            request.setAttribute("listImage",listImage);
+            request.setAttribute("comments",comments);
+
             request.getRequestDispatcher("Detail.jsp").forward(request,response);
         } catch (SQLException e) {
             e.printStackTrace();

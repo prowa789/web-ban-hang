@@ -1,5 +1,4 @@
 
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="col-sm-3">
@@ -9,7 +8,6 @@
             <c:forEach items="${listCategory}" var="o">
                 <li class="list-group-item text-white ${tag == o.id ? "active":""}"><a href="category?id=${o.id}">${o.name}</a></li>
             </c:forEach>
-
         </ul>
     </div>
     <div class="card bg-light mb-3">

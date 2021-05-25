@@ -14,4 +14,12 @@ public interface ProductDao extends BaseDao<Product> {
 
     List<Product> search(String txtSearch) throws SQLException;
 
+    List<Product> get3Product() throws SQLException;
+
+    List<Product> getNext3Product(int amount) throws SQLException;
+
+    int getTotalProduct() throws SQLException;
+
+    List<Product> pagingProduct(int index) throws SQLException;
+
 }

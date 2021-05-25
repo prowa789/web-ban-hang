@@ -1,3 +1,4 @@
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!--begin of menu-->
@@ -19,18 +20,18 @@
                         </button>
                     </div>
                 </div>
-                <a class="btn btn-success btn-sm ml-3" href="cart">
+
+                <a class="btn btn-success btn-sm ml-3" href="Cart.jsp">
                     <i class="fa fa-shopping-cart"></i> Cart
-                    <span class="badge badge-light">3</span>
+                    <span class="badge badge-light">${sessionScope.cart.size()}</span>
                 </a>
+
             </form>
         </div>
     </div>
 </nav>
-<section class="jumbotron text-center">
-    <div class="container">
-        <h1 class="jumbotron-heading">Siêu thị điện thoại chất lượng cao</h1>
-        <p class="lead text-muted mb-0">Uy tín tạo nên thương hiệu với hơn 10 năm cung cấp các sản phầm nhập từ Trung Quốc</p>
-    </div>
+<section class="jumbotron " style="
+    background-image: url('https://images.pexels.com/photos/82256/pexels-photo-82256.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');
+    ">
 </section>
 <!--end of menu-->

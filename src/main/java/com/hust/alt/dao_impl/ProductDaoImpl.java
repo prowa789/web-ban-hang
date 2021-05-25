@@ -7,6 +7,7 @@ import com.hust.alt.model.Product;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDaoImpl extends BaseDaoImpl<Product> implements ProductDao {
@@ -141,12 +142,49 @@ public class ProductDaoImpl extends BaseDaoImpl<Product> implements ProductDao {
         return lastProduct;
     }
     public List<Product> search(String txtSearch) throws SQLException {
-        String sql = "select p.* from product as p where p.deleted = false and " +
-                "p.name like ? or p.introduction like ?";
+        String sql = "select * from product where deleted = false and " +
+                "name like ? ";
         PreparedStatement preparedStatement = myConnection.prepare(sql);
-        preparedStatement.setString(1,"%" +txtSearch+"%");
-        preparedStatement.setString(2,"%" +txtSearch+"%");
+        preparedStatement.setString(1,"%"+txtSearch+"%");
         ResultSet resultSet = preparedStatement.executeQuery();
+        return getList(resultSet);
+    }
+
+    @Override
+    public List<Product> get3Product() throws SQLException {
+        String sql = "select *\n" +
+                "from product where deleted = false\n" +
+                "order by id asc\n" +
+                "limit 3";
+        PreparedStatement statement = myConnection.prepare(sql);
+        ResultSet resultSet = statement.executeQuery();
+        return getList(resultSet);
+    }
+
+    @Override
+    public List<Product> getNext3Product(int amount) throws SQLException {
+        String sql = "select * from product where deleted = false order by id limit 3 offset ? ";
+        PreparedStatement statement = myConnection.prepare(sql);
+        statement.setInt(1, amount);
+        ResultSet resultSet = statement.executeQuery();
+        return getList(resultSet);
+    }
+
+    @Override
+    public int getTotalProduct() throws SQLException {
+        String sql = "select count(*) from product where deleted = false";
+        PreparedStatement statement = myConnection.prepare(sql);
+        ResultSet resultSet = statement.executeQuery();
+        while (resultSet.next()) return resultSet.getInt(1);
+        return 0;
+    }
+
+    @Override
+    public List<Product> pagingProduct(int index) throws SQLException {
+        String sql = "select * from product where deleted = false order by id limit 3 offset ? ";
+        PreparedStatement statement = myConnection.prepare(sql);
+        statement.setInt(1, (index-1)*3);
+        ResultSet resultSet = statement.executeQuery();
         return getList(resultSet);
     }
 }

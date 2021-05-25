@@ -31,6 +31,12 @@ public class Account {
         this.sdt = sdt;
         this.deleted = deleted;
     }
+    public Account( String username, String password, String email, String sdt) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.sdt = sdt;
+    }
 
     public int getId() {
         return id;

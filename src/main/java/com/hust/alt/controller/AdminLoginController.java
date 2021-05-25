@@ -36,7 +36,7 @@ public class AdminLoginController extends HttpServlet {
                 Cookie cookie = new Cookie("userId",  String.valueOf(account.getId()));
                 cookie.setMaxAge(2 * 60 * 60);
                 response.addCookie(cookie);
-
+                request.setAttribute("acc",account);
                 response.sendRedirect(request.getContextPath() + "/admin/manager-product");
             }
 
@@ -49,4 +49,6 @@ public class AdminLoginController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.getRequestDispatcher("/Login.jsp").forward(request,response);
     }
+
 }
+

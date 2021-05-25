@@ -6,48 +6,111 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>${product.name}</title>
+        <link rel="shortcut icon" href="https://set.hust.edu.vn/storage/logo/set-logo.png"
+              type="image/x-icon">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
+
         <style>
-            .gallery-wrap .img-big-wrap img {
-                height: 450px;
-                width: auto;
-                display: inline-block;
-                cursor: zoom-in;
+            *{
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box
             }
+            .show{
+                width: 400px;
+                height: 400px;
+                z-index: 999;
+            }
+            #show-img { width: 400px; height: 400px; }
+            .small-img{
+                width: 350px;
+                height: 70px;
+                margin-top: 10px;
+                position: relative;
+                left: 25px;
+            }
+            .small-img .icon-left, .small-img .icon-right{
+                width: 12px;
+                height: 24px;
+                cursor: pointer;
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                margin: auto 0;
+            }
+            .small-img .icon-left{
 
-
-            .gallery-wrap .img-small-wrap .item-gallery {
-                width: 60px;
-                height: 60px;
-                border: 1px solid #ddd;
-                margin: 7px 2px;
-                display: inline-block;
+            }
+            .small-img .icon-right{
+                right: 0;
+            }
+            .small-img .icon-left:hover, .small-img .icon-right:hover{
+                opacity: .5;
+            }
+            .small-container{
+                width: 310px;
+                height: 70px;
                 overflow: hidden;
+                position: absolute;
+                left: 0;
+                right: 0;
+                margin: 0 auto;
+            }
+            .small-container div{
+                width: 800%;
+                position: relative;
             }
 
-            .gallery-wrap .img-small-wrap {
-                text-align: center;
+            .small-container .show-small-img{
+                width: 70px;
+                height: 70px;
+                margin-right: 6px;
+                cursor: pointer;
+                float: left;
             }
-            .gallery-wrap .img-small-wrap img {
-                max-width: 100%;
-                max-height: 100%;
-                object-fit: cover;
-                border-radius: 4px;
-                cursor: zoom-in;
+            .small-container .show-small-img:last-of-type{
+                margin-right: 0;
             }
-            .img-big-wrap img{
-                width: 100% !important;
-                height: auto !important;
+
+            .form-group.col-md-4,.form-group.col-md-6 {
+                font-weight: bold;
+                font-size: 16px;
+            }
+            .form-group.col-md-6 {
+                margin-left: -16px;
+            }
+            .comment {
+                width: max-content;
+                position: relative;
+                padding: 10px;
+                border-radius: 15px;
+                background-color: #EBEDF0;
+                margin: 10px 0px;
             }
         </style>
     </head>
     <body>
         <jsp:include page="Menu.jsp"></jsp:include>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="home">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="#">${product.name}</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
             <div class="container">
                 <div class="row">
                 <jsp:include page="Left.jsp"></jsp:include>
@@ -55,16 +118,27 @@
                     <div class="container">
                         <div class="card">
                             <div class="row">
-                                <aside class="col-sm-5 border-right">
-                                    <article class="gallery-wrap"> 
-                                        <div class="img-big-wrap">
-                                            <div> <a href="#"><img src="${product.image}"></a></div>
-                                        </div> <!-- slider-product.// -->
-                                        <div class="img-small-wrap">
-                                        </div> <!-- slider-nav.// -->
-                                    </article> <!-- gallery-wrap .end// -->
+                                <aside class="col-sm-6 border-right">
+
+                                    <div class="show" href="${product.image}">
+                                        <img src="${product.image}" id="show-img">
+                                    </div>
+                                    <div class="small-img">
+                                        <img src="images/online_icon_right@2x.png" class="icon-left" alt="" id="prev-img">
+                                        <div class="small-container">
+                                            <div id="small-img-roll">
+                                                <img src="${product.image}" class="show-small-img" alt="">
+                                                <c:forEach items="${listImage}" var="o">
+                                                    <img src="${o.source}" class="show-small-img" alt="">
+                                                </c:forEach>
+                                            </div>
+                                        </div>
+                                        <img src="images/online_icon_right@2x.png" class="icon-right" alt="" id="next-img">
+                                    </div>
+                                        </article>
+                                    </aside>
                                 </aside>
-                                <aside class="col-sm-7">
+                                <aside class="col-sm-6">
                                     <article class="card-body p-5">
                                         <h3 class="title mb-3">${product.name}</h3>
 
@@ -97,8 +171,7 @@
 
                                         </div> <!-- row.// -->
                                         <hr>
-                                        <a href="#" class="btn btn-lg btn-primary text-uppercase"> Buy now </a>
-                                        <a href="#" class="btn btn-lg btn-outline-primary text-uppercase"> <i class="fas fa-shopping-cart"></i> Add to cart </a>
+                                        <a href="cart?command=addCart&id=${product.id}" class="btn btn-lg btn-primary text-uppercase"> <i class="fa fa-shopping-cart"></i> Buy now </a>
                                     </article> <!-- card-body.// -->
                                 </aside> <!-- col.// -->
                             </div> <!-- row.// -->
@@ -109,6 +182,74 @@
                 </div>
             </div>
         </div>
+        <div class="container">
+            <form action="comment?id=${product.id}" method="post">
+                <div class="panel-heading" style="background-color: #0cafe5;color: white;padding: 5px 18px;">
+                    <div class="panel-title" style="font-size: 25px">Leave your comment</div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label>Your Name</label>
+                        <input class ="form-control" type="text" name="name" placeholder="Tiến Bịp" required="required">
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="form-group col-md-4">
+                        <label>Your Email</label>
+                        <input class ="form-control" type="email" name="email" placeholder="abc@gmail.com(not required)" >
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="form-group col-md-4">
+                        <label>Your Phone Number</label>
+                        <input class ="form-control" type="text" name="sdt" placeholder="10 numbers(not required)" >
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label>Your Comment</label>
+                    <textarea class="form-control" rows="4" name="comment" placeholder="Comment here" required="required"></textarea>
+                </div>
+                <div class="clearfix"></div>
+                <div class="form-group col-md-6">
+                    <button class="btn btn-primary bt-lg btn-block" )"
+                            type="submit" >POST</button>
+                </div>
+            </form>
+            <p id="print"></p>
+            <div class="panel-heading" style="background-color: #0cafe5;color: white;padding: 5px 18px;">
+                <div class="panel-title" style="font-size: 25px">Comments</div>
+            </div>
+            <div class="content">
+                <c:forEach items="${comments}" var="c">
+                    <div class="comment">
+                        <strong>${c.name}</strong>
+                        <div>${c.comment}</div>
+                    </div>
+                </c:forEach>
+            </div>
+
+        </div>
        <jsp:include page="Footer.jsp"></jsp:include>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
+        <script src="${pageContext.request.contextPath}/scripts/zoom-image.js"></script>
+        <script src="${pageContext.request.contextPath}/scripts/main.js"></script>
     </body>
+<%--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>--%>
+<%--    <script>--%>
+<%--        function comment() {--%>
+<%--            $.ajax({--%>
+<%--                url: "/web_ban_hang_war/comment",--%>
+<%--                type: "post", //send it through post method--%>
+<%--                data: {--%>
+<%--                },--%>
+<%--                success: function (data) {--%>
+<%--                    var row = document.getElementById("content");--%>
+<%--                    row.innerHTML += data;--%>
+<%--                },--%>
+<%--                error: function (xhr) {--%>
+<%--                    //Do Something to handle error--%>
+<%--                }--%>
+<%--            });--%>
+<%--        }--%>
+<%--    </script>--%>
 </html>
