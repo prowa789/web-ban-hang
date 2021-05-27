@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebFilter(filterName = "AuthFilter", urlPatterns = "/admin/*")
+@WebFilter(filterName = "AuthFilter", urlPatterns = "/admin/**")
 public class AuthFilter implements Filter {
 
     AccountDao accountDao = new AccountDaoImpl();

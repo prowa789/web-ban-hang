@@ -94,6 +94,7 @@
                                     </table>
                                 </div>
                                 <!-- End -->
+
                             </div>
                         </div>
 
@@ -109,6 +110,7 @@
 <%--                        --%>
 
 <%--                        --%>
+                            <a href="checkout" class="btn btn-block btn-primary" style="height: 50px;font-size: 20px">Check Out</a>
 
                     </div>
                 </div>

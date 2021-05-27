@@ -37,7 +37,6 @@ public class DetailController extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
         try {
             // lấy dữ liệu
             int productId = Integer.parseInt(request.getParameter("id"));

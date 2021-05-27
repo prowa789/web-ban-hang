@@ -1,9 +1,6 @@
 package com.hust.alt.dao_impl;
 
-import com.hust.alt.dao.AccountDao;
-import com.hust.alt.dao.CategoryDao;
-import com.hust.alt.dao.CommentDao;
-import com.hust.alt.dao.ProductDao;
+import com.hust.alt.dao.*;
 import com.hust.alt.model.*;
 
 import java.sql.PreparedStatement;
@@ -17,9 +14,13 @@ public class TestDao {
         ProductDao productDao = new ProductDaoImpl();
         CategoryDao categoryDao = new CategoryDaoImpl();
         MyConnection myConnection = new MyConnection();
+        BillDao billDao = new BillDaoImpl();
+        BillDetailDao billDetailDao = new BillDetailDaoImpl();
         try {
 
             myConnection.connectDB();
+            Bill bill = billDao.insert(new Bill("lê tuấn anh","0825050178","Ha noi",1));
+            System.out.println(bill);
 //            Category category = new Category("Huawei",false);
 //            CategoryDao categoryDao = new CategoryDaoImpl();
 //            categoryDao.insert(category);
@@ -38,8 +39,8 @@ public class TestDao {
 //            for (Comment o:list) {
 //                System.out.println(o);
 //            }
-            List<Product> list = productDao.pagingProduct(2);
-            System.out.println(list);
+//            List<Product> list = productDao.pagingProduct(2);
+//            System.out.println(list);
 
 //            Comment comment = commentDao.findById(1);
 //            System.out.println(comment);

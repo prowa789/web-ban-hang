@@ -29,7 +29,6 @@ public class AdminEditProduct extends HttpServlet {
     AccountDao accountDao = new AccountDaoImpl();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
 
         try {
             String id = request.getParameter("id");
