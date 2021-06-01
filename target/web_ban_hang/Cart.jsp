@@ -1,8 +1,8 @@
 <%@ page import="java.text.NumberFormat" %>
-<%@ page import="com.hust.alt.model.Cart" %>
+<%@ page import="com.hust.nhom2.model.Cart" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="com.hust.alt.dao_impl.ProductDaoImpl" %>
-<%@ page import="com.hust.alt.dao.ProductDao" %>
+<%@ page import="com.hust.nhom2.dao_impl.ProductDaoImpl" %>
+<%@ page import="com.hust.nhom2.dao.ProductDao" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -107,10 +107,44 @@
                                         </li>
                                     </ul>
                         </div>
+                            <div class="col-md-12 order-md-1">
+                                <h4 class="mb-3">Information Customer</h4>
+                                <form class="needs-validation" novalidate method="post" action="checkout">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label for="name">Name</label>
+                                            <input type="text" class="form-control" name="name" id="name" placeholder="Tien Bip" value="" required>
+                                            <div class="invalid-feedback">
+                                                Valid first name is required.
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="phoneNumber">Phone Number</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="10 numbers" required>
+                                                <div class="invalid-feedback" style="width: 100%;">
+                                                    Your username is required.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="address">Address</label>
+                                        <input type="text" class="form-control" name="address" id="address" placeholder="1 Dai Co Viet" required>
+                                        <div class="invalid-feedback">
+                                            Please enter your shipping address.
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-block btn-primary">Order</button>
+
+                                </form>
+                            </div>
 <%--                        --%>
 
 <%--                        --%>
-                            <a href="checkout" class="btn btn-block btn-primary" style="height: 50px;font-size: 20px">Check Out</a>
+
 
                     </div>
                 </div>

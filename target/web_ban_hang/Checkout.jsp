@@ -1,8 +1,8 @@
 <%@ page import="java.text.NumberFormat" %>
-<%@ page import="com.hust.alt.model.Cart" %>
+<%@ page import="com.hust.nhom2.model.Cart" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="com.hust.alt.dao_impl.ProductDaoImpl" %>
-<%@ page import="com.hust.alt.dao.ProductDao" %>
+<%@ page import="com.hust.nhom2.dao_impl.ProductDaoImpl" %>
+<%@ page import="com.hust.nhom2.dao.ProductDao" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -23,45 +23,83 @@
     <div class="py-5 text-center">
 
         <h2>Checkout form</h2>
-        <p class="lead">Below is an example form built entirely with Bootstrap’s form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.</p>
     </div>
 
     <div class="row">
-        <div class="col-md-4 order-md-2 mb-4">
+        <div class="col-md-6 order-md-2 mb-4">
             <h4 class="d-flex justify-content-between align-items-center mb-3">
                 <span class="text-muted">Your cart</span>
-                <span class="badge badge-secondary badge-pill">3</span>
+                <span class="badge badge-secondary badge-pill">${sessionScope.cart.size()}</span>
             </h4>
-            <ul class="list-group mb-3">
-                <li class="list-group-item d-flex justify-content-between lh-condensed">
-                    <div>
-                        <h6 class="my-0">Product name</h6>
 
-                    </div>
-                    <span class="text-muted">$12</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between lh-condensed">
-                    <div>
-                        <h6 class="my-0">Second product</h6>
-
-                    </div>
-                    <span class="text-muted">$8</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between lh-condensed">
-                    <div>
-                        <h6 class="my-0">Third item</h6>
-
-                    </div>
-                    <span class="text-muted">$5</span>
-                </li>
-
-                <li class="list-group-item d-flex justify-content-between">
-                    <span>Total (USD)</span>
-                    <strong>$20</strong>
-                </li>
-            </ul>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col" class="border-0 bg-light">
+                            <div class="p-2 px-3 text-uppercase">Product</div>
+                        </th>
+                        <th scope="col" class="border-0 bg-light">
+                            <div class="py-2 text-uppercase">Price</div>
+                        </th>
+                        <th scope="col" class="border-0 bg-light">
+                            <div class="py-2 text-uppercase">Quantity</div>
+                        </th>
+                        <th scope="col" class="border-0 bg-light">
+                            <div class="py-2 text-uppercase">Delete</div>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <%
+                        ProductDao productDAO = new ProductDaoImpl();
+                        NumberFormat nf = NumberFormat.getInstance();
+                        nf.setMinimumIntegerDigits(0);
+                        double total = 0;
+                        ArrayList<Cart> cart=null;
+                        if(session.getAttribute("cart")!=null){
+                            cart = (ArrayList<Cart>) session
+                                    .getAttribute("cart");}
+                    %>
+                    <%
+                        if (cart != null) {
+                            for (Cart c : cart) {
+                                total = total
+                                        + (c.getQuantity() * productDAO.findById(
+                                        c.getProduct().getId()).getPrice());
+                    %>
+                    <tr>
+                        <td scope="row">
+                            <div class="p-2">
+                                <img src="<%=productDAO.findById(c.getProduct().getId())
+							.getImage()%>" alt="" width="70" class="img-fluid rounded shadow-sm">
+                                <div class="ml-3 d-inline-block align-middle">
+                                    <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block"><%=productDAO.findById(c.getProduct().getId())
+                                            .getName()%></a></h5><span class="text-muted font-weight-normal font-italic"></span>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="align-middle"><strong><%=nf.format(productDAO.findById(
+                                c.getProduct().getId()).getPrice())%></strong></td>
+                        <td class="align-middle">
+                            <a href="cart?command=deleteCart&id=<%=c.getProduct().getId()%>"><button class="btnSub">-</button></a>
+                            <strong><%=c.getQuantity()%></strong>
+                            <a href="cart?command=addCart&id=<%=c.getProduct().getId()%>"><button class="btnAdd">+</button></a>
+                        </td>
+                        <td class="align-middle"><a href="cart?command=removeCart&id=<%=c.getProduct().getId()%>" class="text-dark">
+                            <button type="button" class="btn btn-danger">Delete</button>
+                        </a>
+                        </td>
+                    </tr>
+                    <%
+                            }
+                        }
+                    %>
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <div class="col-md-8 order-md-1">
+        <div class="col-md-6 order-md-1">
             <h4 class="mb-3">Thông tin khách hàng</h4>
             <form class="needs-validation" novalidate method="post" action="checkout">
                 <div class="row">

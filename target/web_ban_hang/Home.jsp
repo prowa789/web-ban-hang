@@ -1,10 +1,4 @@
-<%@ page import="com.hust.alt.model.Cart" %>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="java.text.NumberFormat" %>
-<%@ page import="com.hust.alt.dao_impl.ProductDaoImpl" %>
-<%@ page import="com.hust.alt.dao.ProductDao" %>
-<%@ page import="java.util.List" %>
-<%@ page import="com.hust.alt.model.Product" %>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
