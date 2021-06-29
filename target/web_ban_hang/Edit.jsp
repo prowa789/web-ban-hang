@@ -12,7 +12,9 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Bootstrap CRUD Data Table for Database with Modal Form</title>
+        <title>Edit Product</title>
+        <link rel="shortcut icon" href="https://set.hust.edu.vn/storage/logo/set-logo.png"
+              type="image/x-icon">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -28,6 +30,22 @@
         </style>
     <body>
         <div class="container">
+            <nav class="navbar navbar-inverse">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="/web_ban_hang_war">PhoneShop</a>
+                    </div>
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="manager-product">Manager Product</a></li>
+                        <%--                        <li><a href="signup">Đăng kí</a></li>--%>
+                        <li><a href="#"></a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#"><span class="glyphicon glyphicon-user"></span> ${acc.username}</a></li>
+                        <li><a href="/web_ban_hang_war/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                    </ul>
+                </div>
+            </nav>
             <div class="table-wrapper">
                 <div class="table-title">
                     <div class="row">
@@ -45,7 +63,7 @@
                         <form action="edit" method="post">
                             <div class="modal-header">						
                                 <h4 class="modal-title">Edit Product</h4>
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><a href="manager-product">&times;</a></button>
                             </div>
                             <div class="modal-body">					
                                 <div class="form-group">

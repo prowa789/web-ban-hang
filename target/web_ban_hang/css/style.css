@@ -54,7 +54,7 @@ footer {
 }
 footer a {
     color: #f8f9fa!important;
-    text-decoration: none;
+    text-decoration: none ;
 }
 
 .show_txt{
@@ -69,3 +69,7 @@ footer a {
 a .active{
     color: white;
 }
+a {
+    text-decoration: none !important;
+}
+
